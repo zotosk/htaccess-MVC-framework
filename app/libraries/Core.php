@@ -14,7 +14,32 @@ class Core
 
     public function __construct()
     {
-        $this->getUrl();
+        //print_r($this->getUrl());
+        $url = $this->getUrl();
+        //Look in controllers for first index
+        if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
+            //set current controller
+            $this->currentController = ucwords($url[0]);
+            unset($url[0]);
+        }
+
+        //require the controller
+        require_once '../app/controllers/' . $this->currentController . '.php';
+
+        $this->currentController = new $this->currentController;
+
+        if (isset($url[1])) {
+            //check if method exist in controller
+            if (method_exists($this->currentController, $url[1])) {
+                $this->currentMethod = $url[1];
+                unset($url[1]);
+            }
+        }
+
+        //Get Params
+        $this->params = $url ? array_values($url) : [];
+
+        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
 
     public function getUrl()
