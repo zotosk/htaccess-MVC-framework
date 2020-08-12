@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require APPROOT . '/views/inc/header.php'; ?>
+<h1>
+    INDEX php view <?php echo $data['title']; ?>
+</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MVC</title>
-</head>
-
-<body>
-    <h1>
-        INDEX php view <?php echo $data['title']; ?>
-
-    </h1>
-
-</body>
-
-</html>
+<?php require APPROOT . '/views/inc/footer.php'; ?>
