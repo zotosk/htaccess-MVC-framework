@@ -8,7 +8,6 @@
 
 class Controller
 {
-
     public function model($model)
     {
         require_once('../app/model/' . $model . '.php');

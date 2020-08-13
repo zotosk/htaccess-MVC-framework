@@ -38,10 +38,10 @@ class Database
     public function query($sql)
     {
         $this->stmt = $this->dbh->prepare($sql);
-        $this->stmt->execute();
-        $result = $this->dbh->query($sql);
-        $result = $this->stmt->fetchAll();
-        print_r($result);
+        // $this->stmt->execute();
+        // $result = $this->dbh->query($sql);
+        // $result = $this->stmt->fetchAll();
+        // print_r($result);
     }
 
     public function bind($param, $value, $type = null)
@@ -64,5 +64,29 @@ class Database
                     $type = PDO::PARAM_STR;
             }
         }
+
+        $this->stmt->bindValue($param, $value, $type);
+    }
+
+    public function execute()
+    {
+        return $this->stmt->execute();
+    }
+
+    public function resultSet()
+    {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function single()
+    {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function rowCount()
+    {
+        return $this->stmt->rowCount();
     }
 }

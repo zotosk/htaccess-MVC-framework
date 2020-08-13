@@ -1,6 +1,5 @@
 <?php
 
-
 class Post
 {
     private $db;
@@ -8,6 +7,11 @@ class Post
     public function __construct()
     {
         $this->db = new Database;
-        $this->db->query('SELECT * FROM users');
+    }
+
+    public function getPosts()
+    {
+        $this->db->query('SELECT * FROM `users`');
+        return $this->db->resultSet();
     }
 }
