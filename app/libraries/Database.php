@@ -34,4 +34,35 @@ class Database
             echo "Throwable: " . $this->error . PHP_EOL;
         }
     }
+    //Prepare statement query
+    public function query($sql)
+    {
+        $this->stmt = $this->dbh->prepare($sql);
+        $this->stmt->execute();
+        $result = $this->dbh->query($sql);
+        $result = $this->stmt->fetchAll();
+        print_r($result);
+    }
+
+    public function bind($param, $value, $type = null)
+    {
+        if (is_null($type)) {
+            switch (true) {
+                case is_int($value):
+                    $type = PDO::PARAM_INT;
+                    break;
+
+                case is_bool($value):
+                    $type = PDO::PARAM_BOOL;
+                    break;
+
+                case is_null($value):
+                    $type = PDO::PARAM_NULL;
+                    break;
+
+                default:
+                    $type = PDO::PARAM_STR;
+            }
+        }
+    }
 }
