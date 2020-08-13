@@ -23,4 +23,4 @@ define('SITENAME', 'MVC-APP');
 
 ```
 
-the file and .htaccess on public folder for the RewriteEngine `RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]`
+and .htaccess on public folder for the RewriteEngine `RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]`
